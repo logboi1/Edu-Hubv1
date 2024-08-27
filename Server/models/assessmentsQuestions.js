@@ -11,8 +11,8 @@ const assessmentsQuestionsSchema = new mongoose.Schema(
     points: { type: Number, required: true },
     question_text: { type: String, required: true },
     auto_graded: { type: Boolean, default: false }
-  },
-  options
+  }
+  // options
 )
 
 assessmentsQuestionsSchema.set('toJSON', {
@@ -41,22 +41,24 @@ const choiceQuestionSchema = new mongoose.Schema(
     ans: { type: String, required: true },
     text_match: { type: Boolean, default: false }
   },
-  options
+  // options
+  { discriminatorKey: 'assessmentType' }
 )
 
 const writtenQuestionSchema = new mongoose.Schema(
   {
     keywords: [
       {
-        key_word: { type: String, required: true },
-        weight: { type: Number, required: true },
+        key_word: { type: String },
+        weight: { type: Number },
         _id: false
       }
     ],
     ans: { type: String, required: true },
     text_match: { type: Boolean, default: false }
   },
-  options
+  // options
+  { discriminatorKey: 'type' }
 )
 
 const Question = mongoose.model('Question', assessmentsQuestionsSchema)
@@ -64,12 +66,14 @@ const Question = mongoose.model('Question', assessmentsQuestionsSchema)
 const ChoiceQuestion = Question.discriminator(
   'MCQ',
   choiceQuestionSchema,
-  options
+  // options
+  { discriminatorKey: 'type' }
 )
 const WrittenQuestion = Question.discriminator(
   'Esay',
   writtenQuestionSchema,
-  options
+  // options
+  { discriminatorKey: 'type' }
 )
 
 module.exports = {

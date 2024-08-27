@@ -1,10 +1,11 @@
 import axios from 'axios'
 import { getAuthHeader } from './config'
 
-const baseURL = '/assessments'
+const baseURL = process.env.REACT_APP_API_BASE_URL
+// `/assessments`
 
 const getAllExams = async (courseId) => {
-  const response = await axios.get(`/${courseId}${baseURL}`, {
+  const response = await axios.get(`${baseURL}/${courseId}/assessments`, {
     ...getAuthHeader(),
     params: { filter: 'Exam' }
   })
@@ -12,7 +13,7 @@ const getAllExams = async (courseId) => {
 }
 
 const getAllAssignments = async (courseId) => {
-  const response = await axios.get(`/${courseId}${baseURL}`, {
+  const response = await axios.get(`${baseURL}/${courseId}/assessments`, {
     ...getAuthHeader(),
     params: { filter: 'Assignment' }
   })
@@ -21,7 +22,7 @@ const getAllAssignments = async (courseId) => {
 
 const submitAssessment = async (courseId, assessment) => {
   const response = await axios.post(
-    `/${courseId}${baseURL}`,
+    `${baseURL}/${courseId}/assessments`,
     assessment,
     getAuthHeader()
   )
@@ -30,7 +31,7 @@ const submitAssessment = async (courseId, assessment) => {
 
 const deleteAssessment = async (courseId, assessmentId) => {
   const response = await axios.delete(
-    `/${courseId}${baseURL}/${assessmentId}`,
+    `${baseURL}/${courseId}/${assessmentId}`,
     getAuthHeader()
   )
   return response.data

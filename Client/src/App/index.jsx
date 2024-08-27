@@ -209,7 +209,7 @@ const AuthnticatedApp = () => {
             <Route path="/app/*" component={NotFoundView} />
           </Switch>
         </Content>
-        <S.Footer>Copyright ©2021 EduHub</S.Footer>
+        <S.Footer>Copyright ©2023 EduHub</S.Footer>
       </Layout>
     </Layout>
   )

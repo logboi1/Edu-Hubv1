@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@aws-sdk/client-s3": "^3.16.0",
+    "@aws-sdk/middleware-sdk-s3": "^3.427.0",
     "@aws-sdk/s3-request-presigner": "^3.17.0",
     "@cleandersonlobo/react-mic": "^1.2.0",
     "@emotion/core": "^10.1.1",
@@ -37,7 +38,7 @@
     "styled-components": "^5.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

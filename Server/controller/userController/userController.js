@@ -2,7 +2,7 @@ const User = require('../../models/user')
 const jwt = require('jsonwebtoken')
 const axios = require('axios')
 
-const awsEmailResisterUrl = '';
+const awsEmailResisterUrl = ''
 
 const createUser = async (req, res) => {
   try {
@@ -11,17 +11,24 @@ const createUser = async (req, res) => {
     await user.save()
     const token = await user.generateAuthToken()
 
-    axios.post(awsEmailResisterUrl, {
-      InstructorEmail: user.email
-    })
-    .then(res => {
-          console.log('email resistered: ' + res)
-          User.findOneAndUpdate({code: user.code}, { isEmailRegistered: true }).exec()
-        })
-    .catch(err => {
-          console.log("can't resister email: " + err)
-          User.findOneAndUpdate({code: user.code}, { isEmailRegistered: false }).exec()
-        })
+    axios
+      .post(awsEmailResisterUrl, {
+        InstructorEmail: user.email
+      })
+      .then((response) => {
+        console.log('email registered: ' + response)
+        User.findOneAndUpdate(
+          { code: user.code },
+          { isEmailRegistered: true }
+        ).exec()
+      })
+      .catch((err) => {
+        console.log("can't register email: " + err)
+        User.findOneAndUpdate(
+          { code: user.code },
+          { isEmailRegistered: false }
+        ).exec()
+      })
 
     res.status(201).send({ user, token })
   } catch (e) {
@@ -91,20 +98,21 @@ const updateUser = async (req, res) => {
     const user = await User.findByIdAndUpdate(id, usr, { new: true }).exec()
     const token = await user.generateAuthToken()
 
-    if (user.email !== userOld.email || !(user.isEmailRegistered)){
-      axios.post(awsEmailResisterUrl, {
+    if (user.email !== userOld.email || !user.isEmailRegistered) {
+      axios
+        .post(awsEmailResisterUrl, {
           InstructorEmail: user.email
         })
-        .then(res => {
+        .then((res) => {
           console.log('email resistered: ' + res)
-          User.findByIdAndUpdate(id, { isEmailRegistered :true }).exec()
+          User.findByIdAndUpdate(id, { isEmailRegistered: true }).exec()
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("can't resister email: " + err)
           User.findByIdAndUpdate(id, { isEmailRegistered: false }).exec()
         })
-    }else{
-      console.log("email is not changed or already registered")
+    } else {
+      console.log('email is not changed or already registered')
     }
 
     res.status(201).send({ user, token })

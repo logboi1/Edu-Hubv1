@@ -12,7 +12,7 @@ const { DateTime } = require('luxon')
 const Course = require('../../models/course')
 const Notification = require('../../models/notification')
 
-const autoGraderUrl = 'http://127.0.0.1:5000/gradeOnline'
+const autoGraderUrl = 'http://127.0.0.1:4000/gradeOnline'
 
 const getAllAssessments = async (request, response) => {
   try {

@@ -88,7 +88,7 @@ const CourseNavigation = () => {
         <Button type="text">Exams</Button>
       </NavLink>
       {/* <NavLink to={`${url}/exam/12345`} target="_blank">
-        <Button type="text">CheatingDetection</Button>
+        <Button type="text">Cheating Detection</Button>
       </NavLink> */}
     </>
   )

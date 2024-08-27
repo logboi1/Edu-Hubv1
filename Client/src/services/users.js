@@ -1,25 +1,25 @@
 import axios from 'axios'
 import { getAuthHeader } from './config'
 
-const baseURL = '/users'
+const baseURL = process.env.REACT_APP_API_BASE_URL
 
-const register = async (credentials) =>{
-  const response = await axios.post(`${baseURL}/register` ,credentials ) ;
-  return response.data 
+const register = async (credentials) => {
+  const response = await axios.post(`${baseURL}/users/register`, credentials)
+  return response.data
 }
 
 const login = async (credentials) => {
-  const response = await axios.post(`${baseURL}/login`, credentials)
+  const response = await axios.post(`${baseURL}/users/login`, credentials)
   return response.data
 }
 
 const logout = async () => {
-  await axios.post(`${baseURL}/logout`, undefined, getAuthHeader())
+  await axios.post(`${baseURL}/users/logout`, undefined, getAuthHeader())
 }
 
 const update = async (user) => {
   const response = await axios.patch(
-    `${baseURL}/me`,
+    `${baseURL}/users/me`,
     {
       name: user.name,
       email: user.email,

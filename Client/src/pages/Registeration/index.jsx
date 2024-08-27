@@ -97,12 +97,12 @@ const Registeration = () => {
             >
               <Input prefix={<MailOutlined />} placeholder="E-Mail" />
             </Form.Item>
-            <Form.Item name="role">
+            {/* <Form.Item name="role">
               <Select prefix={<UserOutlined />} placeholder="role">
                 <Select.Option value="instructor">Instructor</Select.Option>
                 <Select.Option value="student">Student</Select.Option>
               </Select>
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item
               name="mobile"
               rules={[
@@ -112,7 +112,7 @@ const Registeration = () => {
                 }
               ]}
             >
-              <Input prefix={<MobileOutlined />} placeholder="mobile" />
+              <Input prefix={<MobileOutlined />} placeholder="000-000-0000" />
             </Form.Item>
 
             <Form.Item
@@ -121,6 +121,10 @@ const Registeration = () => {
                 {
                   required: true,
                   message: 'Please input your password!'
+                },
+                {
+                  min: 7,
+                  message: 'please min length for password is 7'
                 }
               ]}
               hasFeedback
@@ -176,7 +180,7 @@ const Registeration = () => {
             </Form.Item>
 
             <FormItemFlex>
-              <Form.Item
+              {/* <Form.Item
                 name="agreement"
                 valuePropName="checked"
                 rules={[
@@ -191,7 +195,8 @@ const Registeration = () => {
                 <Checkbox>
                   I have read the <Link to="#">agreement</Link>
                 </Checkbox>
-              </Form.Item>
+              </Form.Item> */}
+
               {/* <Form.Item>
                 <Link to="/ForgetPassword">Forget Password?</Link>
               </Form.Item> */}
